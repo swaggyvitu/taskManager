@@ -44,6 +44,20 @@ public class TarefaDAO {
 		}
 	}
 
+	public void atualizarTarefa(Tarefa tarefa) {
+		String sql = "UPDATE Tarefa SET titulo = ?, descricao = ?, status = ?, data_vencimento = ? WHERE id = ?";
+		try (PreparedStatement st = conn.prepareStatement(sql)) {
+			st.setString(1, tarefa.getTitulo());
+			st.setString(2, tarefa.getDescricao());
+			st.setString(3, tarefa.getStatus());
+			st.setDate(4, Date.valueOf(tarefa.getDataVencimento()));
+			st.setInt(5, tarefa.getId());
+			st.executeUpdate();
+		} catch (SQLException e) {
+			throw new DbException(e.getMessage());
+		}
+	}
+
 	public Tarefa buscarTarefa(int id) {
 		String sql = "SELECT * FROM Tarefa WHERE id = ?";
 		try (PreparedStatement st = conn.prepareStatement(sql)) {
@@ -70,8 +84,7 @@ public class TarefaDAO {
 		String sql = "SELECT * FROM Tarefa";
 		try (Statement st = conn.createStatement(); ResultSet rs = st.executeQuery(sql)) {
 			while (rs.next()) {
-				Tarefa tarefa = new Tarefa(
-						rs.getInt("id"), 
+				Tarefa tarefa = new Tarefa(rs.getInt("id"), 
 						rs.getString("titulo"), 
 						rs.getString("descricao"),
 						rs.getString("status"), 
