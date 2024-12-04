@@ -24,12 +24,22 @@ public class TarefaDAO {
 	        st.setString(3, tarefa.getStatus());
 	        st.setDate(4, Date.valueOf(tarefa.getDataVencimento()));
 	        st.executeUpdate();
-	    } catch (SQLException e) {
+	    }
+	    catch (SQLException e) {
 	        throw new DbException(e.getMessage());
 	    }
 	}
 
-	
+	public void deletarTarefa(int id) {
+		String sql = "DELETE FROM Tarefa WHERE id = ?";
+		try(PreparedStatement st = conn.prepareStatement(sql)){
+			st.setInt(1, id);
+			st.executeUpdate();
+		}
+		catch (SQLException e) {
+	        throw new DbException(e.getMessage());
+	    }
+	}
 	
 	
 }
