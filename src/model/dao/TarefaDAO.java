@@ -3,7 +3,9 @@ package model.dao;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 import db.DbException;
 import model.entities.Tarefa;
@@ -39,6 +41,28 @@ public class TarefaDAO {
 		catch (SQLException e) {
 	        throw new DbException(e.getMessage());
 	    }
+	}
+	
+	public Tarefa buscarTarefa(int id) {
+		String sql = "SELECT * FROM Tarefa WHERE id = ?";
+		try(PreparedStatement st = conn.prepareStatement(sql)){
+			st.setInt(1, id);
+			ResultSet rs = st.executeQuery();
+
+	        if (rs.next()) {
+	            String titulo = rs.getString("titulo");
+	            String descricao = rs.getString("descricao");
+	            String status = rs.getString("status");
+	            LocalDate dataVencimento = rs.getDate("data_vencimento").toLocalDate();
+
+	            return new Tarefa(id, titulo, descricao, status, dataVencimento);
+	        }
+			
+		}
+		catch (SQLException e) {
+	        throw new DbException(e.getMessage());
+	    }
+		return null;
 	}
 	
 	
