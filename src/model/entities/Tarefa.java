@@ -4,94 +4,87 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 public class Tarefa {
-	
-	private int id;
-	private String titulo;
-	private String descricao;
-	private String status;
-	private LocalDate dataVencimento;
-	
-	public Tarefa() {
-	}
 
-	public Tarefa(int id, String titulo, String descricao, String status, LocalDate dataVencimento) {
-		this.id = id;
-		this.titulo = titulo;
-		this.descricao = descricao;
-		this.status = status;
-		this.dataVencimento = dataVencimento;
-	}
-	
-	public Tarefa(String titulo, String descricao, String status, LocalDate dataVencimento) {
+    private int id;
+    private String titulo;
+    private String descricao;
+    private String status;
+    private LocalDate dataVencimento;
+
+    public Tarefa() {}
+
+    public Tarefa(int id, String titulo, String descricao, String status, LocalDate dataVencimento) {
+        this.id = id;
         this.titulo = titulo;
         this.descricao = descricao;
         this.status = status;
         this.dataVencimento = dataVencimento;
     }
 
-	public int getId() {
-		return id;
-	}
+    public Tarefa(String titulo, String descricao, String status, LocalDate dataVencimento) {
+        this.titulo = titulo;
+        this.descricao = descricao;
+        this.status = status;
+        this.dataVencimento = dataVencimento;
+    }
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    public int getId() {
+        return id;
+    }
 
-	public String getTitulo() {
-		return titulo;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public void setTitulo(String titulo) {
-		this.titulo = titulo;
-	}
+    public String getTitulo() {
+        return titulo;
+    }
 
-	public String getDescricao() {
-		return descricao;
-	}
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
 
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
+    public String getDescricao() {
+        return descricao;
+    }
 
-	public String getStatus() {
-		return status;
-	}
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
 
-	public void setStatus(String status) {
-		this.status = status;
-	}
+    public String getStatus() {
+        return status;
+    }
 
-	public LocalDate getDataVencimento() {
-		return dataVencimento;
-	}
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
-	public void setDataVencimento(LocalDate dataVencimento) {
-		this.dataVencimento = dataVencimento;
-	}
+    public LocalDate getDataVencimento() {
+        return dataVencimento;
+    }
 
-	@Override
-	public String toString() {
-		return "Tarefa [id=" + id + ", titulo=" + titulo + ", descricao=" + descricao + ", status=" + status
-				+ ", dataVencimento=" + dataVencimento + "]";
-	}
+    public void setDataVencimento(LocalDate dataVencimento) {
+        this.dataVencimento = dataVencimento;
+    }
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(id);
-	}
+    @Override
+    public String toString() {
+        return String.format(
+                "ID: %d\nTítulo: %s | Descrição: %s | Status: %s | Data de Vencimento: %s\n",
+                id, titulo, descricao, status, dataVencimento.toString());
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Tarefa other = (Tarefa) obj;
-		return id == other.id;
-	}
-	
-	
-	
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Tarefa other = (Tarefa) obj;
+        return id == other.id;
+    }
 }
